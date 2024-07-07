@@ -5,5 +5,21 @@
     <title>Server Sent Event</title>
   </head>
   <body>
+    <h1>Server Sent Events Example</h1>
+    <div id="sse-data"></div>
+
+    <script>
+        // Setup SSE connection in client side
+        const sseDataRef = document.getElementById('sse-data');
+        const eventSource = new EventSource('/sse');
+
+        eventSource.onmessage = (event) => {
+            // Remember, event is sent by server, it's an object where data lies in data property, along with the id property to debug/identify
+            console.log(event.data);
+            sseDataRef.innerHTML += `<p>${event.data}</p>`;
+        }
+
+    </script>
+
   </body>
 </html>
